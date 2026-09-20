@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinks Calculator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .drink {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .drink-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .field {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .item-total {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 9px;
+            font-size: 17px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .add-btn {
+            background: #222;
+            color: white;
+        }
+
+        .remove-btn {
+            background: #ddd;
+            color: #222;
+            margin-top: 10px;
+        }
+
+        .grand-total {
+            margin-top: 25px;
+            padding: 18px;
+            background: #eee;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .clear-btn {
+            background: #eee;
+            color: #222;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🥤 Drinks Calculator</h1>
+
+    <div id="drinks">
+
+        <div class="drink">
+            <div class="drink-title">Drink 1</div>
+
+            <div class="row">
+
+                <div class="field">
+                    <label>Drink Name</label>
+                    <input type="text"
+                           class="name"
+                           value="Coke"
+                           oninput="calculateTotal()">
+                </div>
+
+                <div class="field">
+                    <label>Cost (GH₵)</label>
+                    <input type="number"
+                           class="price"
+                           value="2"
+                           min="0"
+                           step="0.01"
+                           oninput="calculateTotal()">
+                </div>
+
+                <div class="field">
+                    <label>Quantity</label>
+                    <input type="number"
+                           class="quantity"
+                           value="0"
+                           min="0"
+                           oninput="calculateTotal()">
+                </div>
+
+            </div>
+
+            <div class="item-total">
+                Total: GH₵<span class="item-price">0.00</span>
+            </div>
+
+            <button class="remove-btn" onclick="removeDrink(this)">
+                Remove Drink
+            </button>
+        </div>
+
+
+        <div class="drink">
+            <div class="drink-title">Drink 2</div>
+
+            <div class="row">
+
+                <div class="field">
+                    <label>Drink Name</label>
+                    <input type="text"
+                           class="name"
+                           value="Fanta"
+                           oninput="calculateTotal()">
+                </div>
+
+                <div class="field">
+                    <label>Cost (GH₵)</label>
+                    <input type="number"
+                           class="price"
+                           value="4"
+                           min="0"
+                           step="0.01"
+                           oninput="calculateTotal()">
+                </div>
+
+                <div class="field">
+                    <label>Quantity</label>
+                    <input type="number"
+                           class="quantity"
+                           value="0"
+                           min="0"
+                           oninput="calculateTotal()">
+                </div>
+
+            </div>
+
+            <div class="item-total">
+                Total: GH₵<span class="item-price">0.00</span>
+            </div>
+
+            <button class="remove-btn" onclick="removeDrink(this)">
+                Remove Drink
+            </button>
+        </div>
+
+
+        <div class="drink">
+            <div class="drink-title">Drink 3</div>
+
+            <div class="row">
+
+                <div class="field">
+                    <label>Drink Name</label>
+                    <input type="text"
+                           class="name"
+                           value="Malt"
+                           oninput="calculateTotal()">
+                </div>
+
+                <div class="field">
+                    <label>Cost (GH₵)</label>
+                    <input type="number"
+                           class="price"
+                           value="3"
+                           min="0"
+                           step="0.01"
+                           oninput="calculateTotal()">
+                </div>
+
+                <div class="field">
+                    <label>Quantity</label>
+                    <input type="number"
+                           class="quantity"
+                           value="0"
+                           min="0"
+                           oninput="calculateTotal()">
+                </div>
+
+            </div>
+
+            <div class="item-total">
+                Total: GH₵<span class="item-price">0.00</span>
+            </div>
+
+            <button class="remove-btn" onclick="removeDrink(this)">
+                Remove Drink
+            </button>
+        </div>
+
+
+        <div class="drink">
+            <div class="drink-title">Drink 4</div>
+
+            <div class="row">
+
+                <div class="field">
+                    <label>Drink Name</label>
+                    <input type="text"
+                           class="name"
+                           value="Sprite"
+                           oninput="calculateTotal()">
+                </div>
+
+                <div class="field">
+                    <label>Cost (GH₵)</label>
+                    <input type="number"
+                           class="price"
+                           value="1"
+                           min="0"
+                           step="0.01"
+                           oninput="calculateTotal()">
+                </div>
+
+                <div class="field">
+                    <label>Quantity</label>
+                    <input type="number"
+                           class="quantity"
+                           value="0"
+                           min="0"
+                           oninput="calculateTotal()">
+                </div>
+
+            </div>
+
+            <div class="item-total">
+                Total: GH₵<span class="item-price">0.00</span>
+            </div>
+
+            <button class="remove-btn" onclick="removeDrink(this)">
+                Remove Drink
+            </button>
+        </div>
+
+    </div>
+
+
+    <button class="add-btn" onclick="addDrink()">
+        ➕ Add Drink
+    </button>
+
+    <div class="grand-total">
+        Grand Total: GH₵<span id="grandTotal">0.00</span>
+    </div>
+
+    <button class="clear-btn" onclick="clearAll()">
+        Reset
+    </button>
+
+</div>
+
+
+<script>
+
+let drinkNumber = 4;
+
+
+function calculateTotal() {
+
+    const drinks = document.querySelectorAll(".drink");
+
+    let grandTotal = 0;
+
+    drinks.forEach(drink => {
+
+        const price =
+            Number(drink.querySelector(".price").value) || 0;
+
+        const quantity =
+            Number(drink.querySelector(".quantity").value) || 0;
+
+        const total = price * quantity;
+
+        drink.querySelector(".item-price").textContent =
+            total.toFixed(2);
+
+        grandTotal += total;
+    });
+
+    document.getElementById("grandTotal").textContent =
+        grandTotal.toFixed(2);
+}
+
+
+function addDrink() {
+
+    drinkNumber++;
+
+    const drink = document.createElement("div");
+
+    drink.className = "drink";
+
+    drink.innerHTML = `
+        <div class="drink-title">
+            Drink ${drinkNumber}
+        </div>
+
+        <div class="row">
+
+            <div class="field">
+                <label>Drink Name</label>
+                <input type="text"
+                       class="name"
+                       placeholder="Drink name"
+                       oninput="calculateTotal()">
+            </div>
+
+            <div class="field">
+                <label>Cost (GH₵)</label>
+                <input type="number"
+                       class="price"
+                       placeholder="0.00"
+                       min="0"
+                       step="0.01"
+                       oninput="calculateTotal()">
+            </div>
+
+            <div class="field">
+                <label>Quantity</label>
+                <input type="number"
+                       class="quantity"
+                       value="0"
+                       min="0"
+                       oninput="calculateTotal()">
+            </div>
+
+        </div>
+
+        <div class="item-total">
+            Total: GH₵<span class="item-price">0.00</span>
+        </div>
+
+        <button class="remove-btn"
+                onclick="removeDrink(this)">
+            Remove Drink
+        </button>
+    `;
+
+    document.getElementById("drinks").appendChild(drink);
+
+    calculateTotal();
+}
+
+
+function removeDrink(button) {
+
+    button.parentElement.remove();
+
+    calculateTotal();
+}
+
+
+function clearAll() {
+
+    const drinks = document.querySelectorAll(".drink");
+
+    drinks.forEach(drink => {
+
+        drink.querySelector(".quantity").value = 0;
+
+        drink.querySelector(".item-price").textContent = "0.00";
+    });
+
+    calculateTotal();
+}
+
+
+calculateTotal();
+
+</script>
+
+</body>
+</html>
+
+How it works
+
+Suppose you enter:
+
+Drink| Cost| Quantity| Total
+Coke| 2| 5| GH₵10
+Fanta| 4| 3| GH₵12
+Malt| 3| 2| GH₵6
+
+The app immediately shows:
+
+Grand Total: GH₵28.00
+
+And if you need something else, just tap ➕ Add Drink, enter its name, price and quantity, and it automatically joins the calculation.
+
+Your next step
+
+Since your existing website is already on GitHub, replace the old "index.html" with this new code, upload/commit it, and refresh your website.
+
+Then send me “done” and we'll test the new version together. 🚀
